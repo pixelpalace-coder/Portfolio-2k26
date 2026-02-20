@@ -33,8 +33,6 @@ googleProvider.setCustomParameters({ prompt: 'select_account' });
 
 
 
-const githubProvider = new firebase.auth.GithubAuthProvider();
-
 // Verify auth is ready
 console.log('Auth object created:', !!auth);
 
@@ -119,26 +117,7 @@ function initGoogleLogin() {
 
 
 
-/* ─── GitHub Sign-In ────────────────── */
-function initGitHubLogin() {
-  const btn = document.getElementById('btn-github');
-  if (!btn) return;
 
-  btn.addEventListener('click', async () => {
-    btn.classList.add('loading');
-    document.getElementById('login-error')?.classList.remove('show');
-
-    try {
-      const result = await auth.signInWithPopup(githubProvider);
-      onLoginSuccess(result.user);
-    } catch (err) {
-      btn.classList.remove('loading');
-      if (err.code !== 'auth/popup-closed-by-user') {
-        showError('GitHub sign-in failed. Please try again.');
-      }
-    }
-  });
-}
 
 /* ─── Logout ────────────────────────── */
 function logout() {
@@ -165,7 +144,6 @@ function initLogin() {
   });
 
   initGoogleLogin();
-  initGitHubLogin();
 }
 
 /* ─── Expose globals ────────────────── */

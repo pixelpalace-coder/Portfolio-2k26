@@ -22,10 +22,24 @@ function initAnimations() {
         const yDot = gsap.quickTo(dot, 'y', { duration: 0.07 });
         const xRing = gsap.quickTo(ring, 'x', { duration: 0.25 });
         const yRing = gsap.quickTo(ring, 'y', { duration: 0.25 });
+
+        let mouseX = window.innerWidth / 2;
+        let mouseY = window.innerHeight / 2;
+
         window.addEventListener('mousemove', e => {
-            xDot(e.clientX); yDot(e.clientY);
-            xRing(e.clientX); yRing(e.clientY);
+            mouseX = e.clientX;
+            mouseY = e.clientY;
         });
+
+        function renderCursor() {
+            xDot(mouseX);
+            yDot(mouseY);
+            xRing(mouseX);
+            yRing(mouseY);
+            requestAnimationFrame(renderCursor);
+        }
+        requestAnimationFrame(renderCursor);
+
         document.querySelectorAll('a, button, .project-card, .cert-card, .skill-category-card').forEach(el => {
             el.addEventListener('mouseenter', () => gsap.to(ring, { scale: 2, borderColor: 'rgba(139,92,246,0.8)', duration: 0.3 }));
             el.addEventListener('mouseleave', () => gsap.to(ring, { scale: 1, borderColor: 'rgba(0,200,255,0.5)', duration: 0.3 }));
