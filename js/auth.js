@@ -19,10 +19,20 @@ const firebaseConfig = {
 
 
 // Initialize Firebase
-firebase.initializeApp(firebaseConfig);
+try {
+  firebase.initializeApp(firebaseConfig);
+  console.log('Firebase initialized successfully');
+  console.log('Project ID:', firebaseConfig.projectId);
+} catch (err) {
+  console.error('Firebase initialization error:', err);
+}
+
 const auth = firebase.auth();
 const googleProvider = new firebase.auth.GoogleAuthProvider();
 googleProvider.setCustomParameters({ prompt: 'select_account' });
+
+// Verify auth is ready
+console.log('Auth object created:', !!auth);
 
 const AUTH_KEY = 'sn_portfolio_auth';
 
@@ -89,6 +99,12 @@ function initEmailLogin() {
     const email = document.getElementById('email').value.trim();
     const password = document.getElementById('password').value;
 
+    console.log('=== LOGIN ATTEMPT ===');
+    console.log('Email:', email);
+    console.log('Password length:', password.length);
+    console.log('Firebase initialized:', !!firebase);
+    console.log('Auth object:', !!auth);
+
     submitBtn.classList.add('loading');
     errorEl.classList.remove('show');
 
@@ -96,11 +112,20 @@ function initEmailLogin() {
       let result;
       try {
         // Try normal sign-in first
+        console.log('Attempting sign-in...');
         result = await auth.signInWithEmailAndPassword(email, password);
+        console.log('Sign-in successful!');
       } catch (err) {
+        console.log('Sign-in failed:', err);
+        console.log('Error code:', err.code);
+        console.log('Error message:', err.message);
+        console.log('Full error object:', JSON.stringify(err, null, 2));
+        
         // If no user exists, automatically create an account and log in
         if (err.code === 'auth/user-not-found') {
+          console.log('User not found, creating new account...');
           result = await auth.createUserWithEmailAndPassword(email, password);
+          console.log('Account created and signed in!');
         } else {
           throw err;
         }
@@ -108,15 +133,30 @@ function initEmailLogin() {
       onLoginSuccess(result.user);
     } catch (err) {
       submitBtn.classList.remove('loading');
+      
+      // Comprehensive error logging
+      console.error('=== FINAL ERROR ===');
+      console.error('Error code:', err.code);
+      console.error('Error message:', err.message);
+      console.error('Error name:', err.name);
+      console.error('Full error:', err);
+      
       // Friendly error messages
       const map = {
-        'auth/user-not-found': 'No account found with this email.',
+        'auth/user-not-found': 'No account found. Creating new account...',
         'auth/wrong-password': 'Incorrect password. Please try again.',
         'auth/invalid-email': 'Please enter a valid email address.',
+        'auth/weak-password': 'Password must be at least 6 characters.',
+        'auth/email-already-in-use': 'This email is already registered. Try signing in.',
         'auth/too-many-requests': 'Too many attempts. Please wait a moment.',
-        'auth/invalid-credential': 'Incorrect email or password.'
+        'auth/invalid-credential': 'Incorrect email or password.',
+        'auth/operation-not-allowed': 'Email/Password sign-in is not enabled. Please check Firebase settings.',
+        'auth/network-request-failed': 'Network error. Check your internet connection.'
       };
-      showError(map[err.code] || 'Sign-in failed. Please try again.');
+      const errorCode = err.code || 'unknown';
+      const errorMsg = map[errorCode] || `Sign-in failed: ${errorCode}. Please try again.`;
+      console.error('Showing error to user:', errorMsg);
+      showError(errorMsg);
     }
   });
 }
