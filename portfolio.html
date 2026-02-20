@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suryansh Niranjan — Python Programmer</title>
+    <meta name="description"
+        content="Portfolio of Suryansh Niranjan, a Python Programmer specializing in data-driven applications, web development, and creative tech projects.">
+    <link rel="icon" id="favicon" type="image/png" href="favicon.png">
+    <link rel="apple-touch-icon" href="favicon.png">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/portfolio.css">
+    <link rel="stylesheet" href="css/chatbot.css">
+    <link rel="stylesheet" href="css/animations.css">
+
+    <!-- GSAP + ScrollTrigger -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+    <style>
+        /* Prevent FOUC — hide animated elements until JS sets initial states */
+        .hero-eyebrow,
+        .hero-title .word,
+        .hero-tagline,
+        .hero-actions>*,
+        .hero-scroll {
+            opacity: 0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Custom cursor -->
+    <div class="cursor-dot"></div>
+    <div class="cursor-ring"></div>
+
+    <!-- ═══════════════════════════════════════
+       NAVBAR
+  ═══════════════════════════════════════ -->
+    <nav id="navbar">
+        <a href="#hero" class="nav-brand">Suryansh.dev</a>
+
+        <ul class="nav-links" id="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#certifications">Certifications</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li style="position:relative;">
+                <!-- Avatar trigger -->
+                <div class="nav-user" id="nav-user" onclick="toggleProfilePanel(event)" title="Your account">
+                    <img id="nav-avatar" class="nav-avatar" src="" alt="Profile"
+                        onerror="this.style.display='none';document.getElementById('nav-avatar-fallback').style.display='flex';">
+                    <div id="nav-avatar-fallback" class="nav-avatar nav-avatar-fallback" style="display:none;"></div>
+                </div>
+
+                <!-- Google-style profile panel -->
+                <div class="profile-panel" id="profile-panel">
+                    <div class="profile-panel-header">
+                        <!-- Large profile photo -->
+                        <div class="profile-panel-photo-wrap">
+                            <img id="pp-photo" class="profile-panel-photo" src="" alt="Profile"
+                                onerror="this.style.display='none';document.getElementById('pp-initials').style.display='flex';">
+                            <div id="pp-initials" class="profile-panel-photo profile-panel-initials"
+                                style="display:none;"></div>
+                        </div>
+                        <h3 id="pp-name" class="profile-panel-name"></h3>
+                        <p id="pp-email" class="profile-panel-email"></p>
+                    </div>
+                    <div class="profile-panel-divider"></div>
+                    <button class="profile-panel-logout" onclick="logout()">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4" />
+                            <polyline points="16 17 21 12 16 7" />
+                            <line x1="21" y1="12" x2="9" y2="12" />
+                        </svg>
+                        Sign out
+                    </button>
+                </div>
+            </li>
+
+        </ul>
+
+        <div class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">
+            <span></span><span></span><span></span>
+        </div>
+    </nav>
+
+    <!-- ═══════════════════════════════════════
+       HERO SECTION
+  ═══════════════════════════════════════ -->
+    <section id="hero">
+        <div class="hero-bg">
+            <div class="hero-glow-1"></div>
+            <div class="hero-glow-2"></div>
+            <div class="hero-grid-bg"></div>
+        </div>
+
+        <div class="container hero-content">
+            <div class="hero-eyebrow">
+                Open to opportunities · GLA University BCA
+            </div>
+
+            <h1 class="hero-title">
+                <span class="line">
+                    <span class="word">Hi,&nbsp;</span><span class="word">I'm&nbsp;</span><span
+                        class="word highlight">Suryansh</span>
+                </span>
+                <span class="line">
+                    <span class="word">a&nbsp;</span><span class="word">Python</span>
+                </span>
+                <span class="line">
+                    <span class="word highlight">Programmer.</span>
+                </span>
+            </h1>
+
+            <p class="hero-tagline">
+                Aspiring IT professional skilled in Python, JavaScript & Java — building data-driven solutions, elegant
+                web apps, and creative software.
+            </p>
+
+            <div class="hero-actions">
+                <a href="#projects" class="btn-primary">
+                    View My Work
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7" />
+                    </svg>
+                </a>
+                <a href="#contact" class="btn-outline">Let's Connect</a>
+            </div>
+        </div>
+
+        <div class="hero-scroll">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                opacity="0.5">
+                <path d="M12 5v14M5 12l7 7 7-7" />
+            </svg>
+            <span>scroll</span>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+       ABOUT SECTION
+  ═══════════════════════════════════════ -->
+    <section id="about">
+        <div class="container">
+            <div class="about-grid">
+
+                <!-- Avatar -->
+                <div class="about-image-wrap">
+                    <div class="about-image-placeholder">
+                        <img src="images/profile.jpg" alt="Portrait of Suryansh Niranjan in office"
+                            class="about-photo">
+                        <div class="about-image-border"></div>
+                    </div>
+                    <div class="about-badge about-badge-1">
+                        <div class="badge-dot"></div>
+                        Python Developer
+                    </div>
+                    <div class="about-badge about-badge-2">
+                        <div class="badge-dot" style="background:#8b5cf6;box-shadow:0 0 8px #8b5cf6;"></div>
+                        GLA University
+                    </div>
+                </div>
+
+                <!-- Content -->
+                <div class="about-content">
+                    <span class="section-label">About Me</span>
+                    <h2 class="section-title">Building solutions with <span class="gradient-text">Python & beyond</span>
+                    </h2>
+
+                    <p class="about-text">
+                        Aspiring IT professional currently pursuing a Bachelor's of Computer Application from GLA
+                        University, Mathura, UP, India. Skilled in Python, JavaScript, and Java, with a keen interest in
+                        expanding expertise in Kotlin, Go, and Java.
+                    </p>
+                    <p class="about-text">
+                        Seeking opportunities to apply my skills in a dynamic environment and contribute to innovative
+                        projects — from data analytics and automation to interactive web experiences.
+                    </p>
+                    <p class="about-text">
+                        I bring a collaborative mindset, strong leadership, and a commitment to clean, impactful code to
+                        every project I work on.
+                    </p>
+
+                    <div class="about-stats">
+                        <div class="stat-item">
+                            <div class="stat-number">4+</div>
+                            <div class="stat-label">Projects Built</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">4</div>
+                            <div class="stat-label">Certifications</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">1</div>
+                            <div class="stat-label">Internship</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+       SKILLS SECTION
+  ═══════════════════════════════════════ -->
+    <section id="skills">
+        <div class="container">
+            <span class="section-label">Expertise</span>
+            <h2 class="section-title">My <span class="gradient-text">Tech Stack</span></h2>
+            <p class="section-subtitle">Languages, libraries and tools I use to solve real-world problems.</p>
+
+            <div class="skills-categories">
+
+                <div class="skill-category-card">
+                    <div class="skill-cat-icon">🐍</div>
+                    <h3 class="skill-cat-title">Programming Languages</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag featured">Python</span>
+                        <span class="skill-tag">JavaScript</span>
+                        <span class="skill-tag">Java</span>
+                        <span class="skill-tag">HTML5</span>
+                        <span class="skill-tag">CSS3</span>
+                    </div>
+                </div>
+
+                <div class="skill-category-card">
+                    <div class="skill-cat-icon">📦</div>
+                    <h3 class="skill-cat-title">Python Libraries</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag featured">Pandas</span>
+                        <span class="skill-tag featured">Matplotlib</span>
+                        <span class="skill-tag">Streamlit</span>
+                        <span class="skill-tag">Pygame</span>
+                        <span class="skill-tag">pyttsx3</span>
+                        <span class="skill-tag">Speech Recognition</span>
+                    </div>
+                </div>
+
+                <div class="skill-category-card">
+                    <div class="skill-cat-icon">🌐</div>
+                    <h3 class="skill-cat-title">Web & Databases</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag featured">MySQL</span>
+                        <span class="skill-tag">Firebase</span>
+                        <span class="skill-tag">Three.js</span>
+                        <span class="skill-tag">GSAP</span>
+                        <span class="skill-tag">Git</span>
+                    </div>
+                </div>
+
+                <div class="skill-category-card">
+                    <div class="skill-cat-icon">🤝</div>
+                    <h3 class="skill-cat-title">Soft Skills</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag featured">Leadership</span>
+                        <span class="skill-tag featured">Mentoring</span>
+                        <span class="skill-tag">Helping</span>
+                        <span class="skill-tag">Collaboration</span>
+                        <span class="skill-tag">Problem Solving</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+       PROJECTS SECTION
+  ═══════════════════════════════════════ -->
+    <section id="projects">
+        <div class="container">
+            <span class="section-label">Portfolio</span>
+            <h2 class="section-title">Featured <span class="gradient-text">Projects</span></h2>
+            <p class="section-subtitle">Real-world software built with Python, data science tools, and modern web
+                technologies.</p>
+
+            <div class="projects-grid" id="projects-grid">
+                <!-- Rendered by portfolio.js -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Detail Modal -->
+    <div class="modal-overlay" id="project-modal">
+        <div class="modal-box">
+            <button class="modal-close" onclick="closeProjectModal()">✕</button>
+            <div style="display:flex;align-items:center;gap:16px;margin-bottom:20px;">
+                <div class="project-icon" id="modal-icon" style="margin-bottom:0;font-size:2rem;"></div>
+                <h2 class="project-title" id="modal-title" style="margin-bottom:0;font-size:1.4rem;"></h2>
+            </div>
+            <p style="color:rgba(255,255,255,0.55);font-size:0.925rem;line-height:1.75;margin-bottom:20px;"
+                id="modal-desc"></p>
+            <ul id="modal-bullets"
+                style="list-style:none;margin-bottom:20px;display:flex;flex-direction:column;gap:8px;"></ul>
+            <div>
+                <p
+                    style="font-size:0.75rem;text-transform:uppercase;letter-spacing:0.1em;color:rgba(255,255,255,0.3);margin-bottom:10px;font-weight:600;">
+                    Tech Stack</p>
+                <div class="project-tech-stack" id="modal-tech"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════
+       EXPERIENCE SECTION
+  ═══════════════════════════════════════ -->
+    <section id="experience">
+        <div class="container">
+            <span class="section-label">Career</span>
+            <h2 class="section-title">Work <span class="gradient-text">Experience</span></h2>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <p class="timeline-date">01/2026 — 02/2026 &nbsp;·&nbsp; Remote</p>
+                    <h3 class="timeline-company">CodeAlpha</h3>
+                    <p class="timeline-role">Front End Developer</p>
+                    <ul class="timeline-duties">
+                        <li>Utilized HTML, CSS, and JavaScript to create visually appealing and responsive web pages
+                            that met client requirements.</li>
+                        <li>Coded using HTML, CSS, and JavaScript to develop features for both mobile and desktop
+                            platforms.</li>
+                        <li>Worked closely with UX/UI designers to translate their designs into functional web
+                            applications.</li>
+                        <li>Utilized version control systems such as Git to track changes throughout the development
+                            process.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+       CERTIFICATIONS SECTION
+  ═══════════════════════════════════════ -->
+    <section id="certifications">
+        <div class="container">
+            <span class="section-label">Achievements</span>
+            <h2 class="section-title">🏆 <span class="gradient-text">Certifications</span></h2>
+            <p class="section-subtitle">Credentials earned across development, cloud, and database domains.</p>
+
+            <div class="cert-grid" id="cert-grid">
+                <!-- Rendered by portfolio.js -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Certificate Modal -->
+    <div class="modal-overlay" id="cert-modal">
+        <div class="modal-box" style="text-align:center;">
+            <button class="modal-close" onclick="closeCertModal()">✕</button>
+            <p
+                style="font-size:0.75rem;text-transform:uppercase;letter-spacing:0.12em;color:rgba(0,200,255,0.6);margin-bottom:8px;font-weight:600;">
+                Certificate of Completion</p>
+            <canvas id="cert-modal-canvas"
+                style="width:100%;border-radius:12px;margin:16px 0;border:1px solid rgba(255,255,255,0.06);display:block;"></canvas>
+            <h3 id="cert-modal-name"
+                style="font-size:1.3rem;font-family:'Space Grotesk',sans-serif;color:#f0f0f5;margin-bottom:6px;"></h3>
+            <p id="cert-modal-org" style="font-size:0.9rem;color:rgba(0,200,255,0.7);"></p>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════
+       CONTACT SECTION
+  ═══════════════════════════════════════ -->
+    <section id="contact">
+        <div class="container">
+            <span class="section-label">Get In Touch</span>
+            <h2 class="section-title">Let's <span class="gradient-text">Connect</span></h2>
+            <p class="section-subtitle">Open to internships, freelance projects, and exciting collaborations.</p>
+
+            <div class="contact-grid">
+                <!-- Left: Info -->
+                <div class="contact-info">
+                    <h3>Say hello 👋</h3>
+                    <p>Whether you have a project idea, an opportunity, or just want to connect — my inbox is always
+                        open. I'll get back to you as soon as I can!</p>
+
+                    <a href="mailto:suryanshdevniranjan@gmail.com" class="contact-link-row">
+                        <div class="contact-link-icon">✉️</div>
+                        <span class="contact-link-text">suryanshdevniranjan@gmail.com</span>
+                    </a>
+
+                    <a href="tel:+918171630731" class="contact-link-row">
+                        <div class="contact-link-icon">📞</div>
+                        <span class="contact-link-text">+91 8171630731</span>
+                    </a>
+
+                    <div class="contact-socials">
+                        <a href="https://github.com/" target="_blank" rel="noopener" class="social-btn">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                <path
+                                    d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
+                            </svg>
+                            GitHub
+                        </a>
+                        <a href="https://linkedin.com/in/suryansh-niranjan" target="_blank" rel="noopener"
+                            class="social-btn">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                <path
+                                    d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                            </svg>
+                            LinkedIn
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Right: Form -->
+                <div class="contact-form">
+                    <form id="contact-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="cf-name">Name</label>
+                                <input type="text" id="cf-name" placeholder="John Doe" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="cf-email">Email</label>
+                                <input type="email" id="cf-email" placeholder="john@example.com" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="cf-subject">Subject</label>
+                            <input type="text" id="cf-subject" placeholder="What's this about?">
+                        </div>
+                        <div class="form-group">
+                            <label for="cf-message">Message</label>
+                            <textarea id="cf-message" placeholder="Tell me about your project or opportunity..."
+                                required></textarea>
+                        </div>
+                        <button type="submit" class="form-submit">Send Message →</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+       FOOTER
+  ═══════════════════════════════════════ -->
+    <footer>
+        <div class="container">
+            <p class="footer-text">
+                Designed & built with ❤️ by <span>Suryansh Niranjan</span> &nbsp;·&nbsp; Python Programmer &nbsp;·&nbsp;
+                2026
+            </p>
+        </div>
+    </footer>
+
+    <!-- ═══════════════════════════════════════
+       CHATBOT — "Shy"
+  ═══════════════════════════════════════ -->
+    <button id="chat-toggle" title="Chat with Shy">
+        <svg class="icon-chat" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" />
+        </svg>
+        <svg class="icon-close" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18" />
+            <line x1="6" y1="6" x2="18" y2="18" />
+        </svg>
+    </button>
+
+    <div id="chat-window">
+        <div class="chat-header">
+            <div class="chat-avatar">🤖</div>
+            <div class="chat-info">
+                <h4>Shy</h4>
+                <p>Suryansh's AI Assistant</p>
+            </div>
+        </div>
+        <div class="chat-messages" id="chat-messages"></div>
+        <div class="quick-replies" id="quick-replies"></div>
+        <div class="chat-input-area">
+            <input type="text" id="chat-input" placeholder="Ask me anything..." autocomplete="off">
+            <button class="chat-send" id="chat-send" title="Send">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="22" y1="2" x2="11" y2="13" />
+                    <polygon points="22 2 15 22 11 13 2 9 22 2" />
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- ═══ SCRIPTS ═══ -->
+    <!-- Firebase SDKs (must load before auth.js) -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/favicon.js"></script>
+    <script src="js/portfolio.js"></script>
+    <script src="js/chatbot.js"></script>
+    <script src="js/animations.js"></script>
+    <script>
+        // 1. Auth guard
+        authGuard();
+
+        // 2. Smooth body fade-in
+        gsap.set('body', { opacity: 0 });
+        gsap.to('body', { opacity: 1, duration: 0.5, ease: 'power2.out' });
+
+        // 3. Init all modules after DOM ready
+        document.addEventListener('DOMContentLoaded', () => {
+            initPortfolio();   // renders project & cert cards
+            initChatbot();
+            populateUserAvatar();
+
+            // Wait one frame so dynamically rendered cards exist before animating
+            requestAnimationFrame(() => {
+                initAnimations();
+            });
+        });
+
+        // Populate avatar + profile panel from sessionStorage
+        function populateUserAvatar() {
+            const photo = sessionStorage.getItem('sn_user_photo') || '';
+            const name = sessionStorage.getItem('sn_user_name') || '';
+            const email = sessionStorage.getItem('sn_user_email') || '';
+            const firstName = name.split(' ')[0] || name;
+            const initials = name.split(' ').map(w => w[0] || '').join('').toUpperCase().slice(0, 2) || '?';
+
+            // ── Small navbar avatar (always show exactly ONE) ─
+            const img = document.getElementById('nav-avatar');
+            const fallback = document.getElementById('nav-avatar-fallback');
+
+            if (photo && img) {
+                img.src = photo;
+                img.style.display = 'block';
+                if (fallback) fallback.style.display = 'none'; // ← FIX: always hide the other one
+            } else {
+                if (img) img.style.display = 'none';
+                if (fallback) {
+                    fallback.textContent = initials;
+                    fallback.style.display = 'flex';
+                }
+            }
+
+            // ── Profile panel (always show exactly ONE) ───────
+            const ppPhoto = document.getElementById('pp-photo');
+            const ppInitials = document.getElementById('pp-initials');
+
+            if (photo && ppPhoto) {
+                ppPhoto.src = photo;
+                ppPhoto.style.display = 'block';
+                if (ppInitials) ppInitials.style.display = 'none'; // ← FIX
+            } else {
+                if (ppPhoto) ppPhoto.style.display = 'none';
+                if (ppInitials) {
+                    ppInitials.textContent = initials;
+                    ppInitials.style.display = 'flex';
+                }
+            }
+
+            const ppName = document.getElementById('pp-name');
+            const ppEmail = document.getElementById('pp-email');
+            if (ppName) ppName.textContent = firstName ? 'Hi, ' + firstName + '!' : 'Hi there!';
+            if (ppEmail) ppEmail.textContent = email || name;
+        }
+
+
+        // Toggle profile panel open/close
+        function toggleProfilePanel(e) {
+            e.stopPropagation();
+            const panel = document.getElementById('profile-panel');
+            const isOpen = panel.classList.contains('open');
+            panel.classList.toggle('open', !isOpen);
+        }
+
+        // Close panel on outside click
+        document.addEventListener('click', () => {
+            document.getElementById('profile-panel')?.classList.remove('open');
+        });
+
+    </script>
+
+</body>
+
+</html>

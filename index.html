@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Suryansh Niranjan — Portfolio</title>
+  <meta name="description" content="Login to access the portfolio of Suryansh Niranjan, Python Programmer.">
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="apple-touch-icon" href="favicon.png">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/login.css">
+
+  <!-- GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
+  <!-- Firebase SDKs (compat v9) -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+
+  <style>
+    .loader-name {
+      transform: translateY(20px);
+    }
+
+    .loader-subtitle {
+      transform: translateY(10px);
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ═══ LOADER ═══ -->
+  <div id="loader">
+    <div class="loader-name">Suryansh Niranjan</div>
+    <div class="loader-subtitle">Python Programmer</div>
+    <div class="loader-bar-wrap">
+      <div class="loader-bar" id="loader-bar"></div>
+    </div>
+    <div class="loader-dots">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+
+  <!-- ═══ LOGIN PAGE ═══ -->
+  <div id="login-page">
+
+    <!-- Animated background -->
+    <div class="login-bg">
+      <div class="orb orb-1"></div>
+      <div class="orb orb-2"></div>
+      <div class="orb orb-3"></div>
+      <div class="login-grid"></div>
+    </div>
+
+    <!-- Card -->
+    <div class="login-card" id="login-card">
+
+      <!-- Brand -->
+      <div class="login-brand">
+        <div class="login-logo">SN</div>
+        <h1>Welcome Back</h1>
+        <p>Sign in to view the portfolio</p>
+      </div>
+
+      <!-- ── Google Sign-In ── -->
+      <button class="btn-google" id="btn-google">
+        <span class="btn-google-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24">
+            <path fill="#4285F4"
+              d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
+            <path fill="#34A853"
+              d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
+            <path fill="#FBBC05"
+              d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
+            <path fill="#EA4335"
+              d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
+          </svg>
+        </span>
+        <span class="btn-google-text">Continue with Google</span>
+        <div class="spinner"></div>
+      </button>
+
+      <!-- ── Divider ── -->
+      <div class="auth-divider">
+        <span>or sign in with email</span>
+      </div>
+
+      <!-- ── Email / Password Form ── -->
+      <form class="login-form" id="login-form" autocomplete="off">
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" placeholder="you@example.com" required autocomplete="username">
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" placeholder="••••••••" required autocomplete="current-password">
+        </div>
+
+        <!-- Error message -->
+        <div class="login-error" id="login-error"></div>
+
+        <!-- Submit -->
+        <button type="submit" class="btn-login" id="btn-submit">
+          <span class="btn-text">Sign In with Email</span>
+          <div class="spinner"></div>
+        </button>
+      </form>
+
+      <!-- Footer note -->
+      <div class="login-footer">
+        Secured by <span>Firebase Auth</span>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/auth.js"></script>
+  <script src="js/favicon.js"></script>
+  <script src="js/loader.js"></script>
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      // Run loader, then reveal card
+      initLoader(() => {
+        gsap.to('#login-card', {
+          opacity: 1, y: 0,
+          duration: 0.7,
+          ease: 'power3.out'
+        });
+      });
+
+      initLogin();
+    });
+  </script>
+</body>
+
+</html>
