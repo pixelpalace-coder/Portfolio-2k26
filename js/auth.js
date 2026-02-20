@@ -93,7 +93,18 @@ function initEmailLogin() {
     errorEl.classList.remove('show');
 
     try {
-      const result = await auth.signInWithEmailAndPassword(email, password);
+      let result;
+      try {
+        // Try normal sign-in first
+        result = await auth.signInWithEmailAndPassword(email, password);
+      } catch (err) {
+        // If no user exists, automatically create an account and log in
+        if (err.code === 'auth/user-not-found') {
+          result = await auth.createUserWithEmailAndPassword(email, password);
+        } else {
+          throw err;
+        }
+      }
       onLoginSuccess(result.user);
     } catch (err) {
       submitBtn.classList.remove('loading');
