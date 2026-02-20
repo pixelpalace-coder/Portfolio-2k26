@@ -31,6 +31,10 @@ const auth = firebase.auth();
 const googleProvider = new firebase.auth.GoogleAuthProvider();
 googleProvider.setCustomParameters({ prompt: 'select_account' });
 
+
+
+const githubProvider = new firebase.auth.GithubAuthProvider();
+
 // Verify auth is ready
 console.log('Auth object created:', !!auth);
 
@@ -66,6 +70,9 @@ function onLoginSuccess(user) {
     sessionStorage.setItem('sn_user_name', user.displayName || user.email || 'User');
     sessionStorage.setItem('sn_user_email', user.email || '');
   }
+
+  // Set flag to play sound on next page load
+  sessionStorage.setItem('play_login_sound', 'true');
   gsap.to('#login-page', {
     opacity: 0,
     duration: 0.45,
@@ -87,79 +94,7 @@ function showError(msg) {
   setTimeout(() => card.classList.remove('shake'), 600);
 }
 
-/* ─── Email / Password Login ────────── */
-function initEmailLogin() {
-  const form = document.getElementById('login-form');
-  const submitBtn = document.getElementById('btn-submit');
-  const errorEl = document.getElementById('login-error');
-  if (!form) return;
 
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const email = document.getElementById('email').value.trim();
-    const password = document.getElementById('password').value;
-
-    console.log('=== LOGIN ATTEMPT ===');
-    console.log('Email:', email);
-    console.log('Password length:', password.length);
-    console.log('Firebase initialized:', !!firebase);
-    console.log('Auth object:', !!auth);
-
-    submitBtn.classList.add('loading');
-    errorEl.classList.remove('show');
-
-    try {
-      let result;
-      try {
-        // Try normal sign-in first
-        console.log('Attempting sign-in...');
-        result = await auth.signInWithEmailAndPassword(email, password);
-        console.log('Sign-in successful!');
-      } catch (err) {
-        console.log('Sign-in failed:', err);
-        console.log('Error code:', err.code);
-        console.log('Error message:', err.message);
-        console.log('Full error object:', JSON.stringify(err, null, 2));
-        
-        // If no user exists, automatically create an account and log in
-        if (err.code === 'auth/user-not-found') {
-          console.log('User not found, creating new account...');
-          result = await auth.createUserWithEmailAndPassword(email, password);
-          console.log('Account created and signed in!');
-        } else {
-          throw err;
-        }
-      }
-      onLoginSuccess(result.user);
-    } catch (err) {
-      submitBtn.classList.remove('loading');
-      
-      // Comprehensive error logging
-      console.error('=== FINAL ERROR ===');
-      console.error('Error code:', err.code);
-      console.error('Error message:', err.message);
-      console.error('Error name:', err.name);
-      console.error('Full error:', err);
-      
-      // Friendly error messages
-      const map = {
-        'auth/user-not-found': 'No account found. Creating new account...',
-        'auth/wrong-password': 'Incorrect password. Please try again.',
-        'auth/invalid-email': 'Please enter a valid email address.',
-        'auth/weak-password': 'Password must be at least 6 characters.',
-        'auth/email-already-in-use': 'This email is already registered. Try signing in.',
-        'auth/too-many-requests': 'Too many attempts. Please wait a moment.',
-        'auth/invalid-credential': 'Incorrect email or password.',
-        'auth/operation-not-allowed': 'Email/Password sign-in is not enabled. Please check Firebase settings.',
-        'auth/network-request-failed': 'Network error. Check your internet connection.'
-      };
-      const errorCode = err.code || 'unknown';
-      const errorMsg = map[errorCode] || `Sign-in failed: ${errorCode}. Please try again.`;
-      console.error('Showing error to user:', errorMsg);
-      showError(errorMsg);
-    }
-  });
-}
 
 /* ─── Google Sign-In ────────────────── */
 function initGoogleLogin() {
@@ -177,6 +112,29 @@ function initGoogleLogin() {
       btn.classList.remove('loading');
       if (err.code !== 'auth/popup-closed-by-user') {
         showError('Google sign-in failed. Please try again.');
+      }
+    }
+  });
+}
+
+
+
+/* ─── GitHub Sign-In ────────────────── */
+function initGitHubLogin() {
+  const btn = document.getElementById('btn-github');
+  if (!btn) return;
+
+  btn.addEventListener('click', async () => {
+    btn.classList.add('loading');
+    document.getElementById('login-error')?.classList.remove('show');
+
+    try {
+      const result = await auth.signInWithPopup(githubProvider);
+      onLoginSuccess(result.user);
+    } catch (err) {
+      btn.classList.remove('loading');
+      if (err.code !== 'auth/popup-closed-by-user') {
+        showError('GitHub sign-in failed. Please try again.');
       }
     }
   });
@@ -206,8 +164,8 @@ function initLogin() {
     }
   });
 
-  initEmailLogin();
   initGoogleLogin();
+  initGitHubLogin();
 }
 
 /* ─── Expose globals ────────────────── */

@@ -223,101 +223,7 @@
     letter-spacing: 0.05em;
 }
 
-/* Form */
-.login-form {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-}
 
-.form-group {
-    position: relative;
-}
-
-.form-group label {
-    display: block;
-    font-size: 0.78rem;
-    font-weight: 500;
-    color: rgba(255, 255, 255, 0.45);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    margin-bottom: 8px;
-}
-
-.form-group input {
-    width: 100%;
-    padding: 14px 18px;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 12px;
-    color: #f0f0f5;
-    font-size: 0.95rem;
-    transition: border-color 0.3s, box-shadow 0.3s, background 0.3s;
-}
-
-.form-group input:focus {
-    border-color: rgba(0, 200, 255, 0.4);
-    background: rgba(255, 255, 255, 0.07);
-    box-shadow: 0 0 0 3px rgba(0, 200, 255, 0.08);
-}
-
-.form-group input::placeholder {
-    color: rgba(255, 255, 255, 0.2);
-}
-
-/* Error message */
-.login-error {
-    font-size: 0.82rem;
-    color: #ff6b6b;
-    text-align: center;
-    padding: 10px 14px;
-    background: rgba(255, 100, 100, 0.08);
-    border: 1px solid rgba(255, 100, 100, 0.2);
-    border-radius: 10px;
-    display: none;
-}
-
-.login-error.show {
-    display: block;
-}
-
-/* Submit button */
-.btn-login {
-    width: 100%;
-    padding: 15px;
-    background: linear-gradient(135deg, #00c8ff, #8b5cf6);
-    border-radius: 12px;
-    color: white;
-    font-weight: 700;
-    font-size: 0.95rem;
-    letter-spacing: 0.04em;
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
-    margin-top: 8px;
-}
-
-.btn-login::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: rgba(255, 255, 255, 0.12);
-    transform: translateX(-100%) skewX(-15deg);
-    transition: transform 0.5s ease;
-}
-
-.btn-login:hover::before {
-    transform: translateX(100%) skewX(-15deg);
-}
-
-.btn-login:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 12px 40px rgba(0, 200, 255, 0.35);
-}
-
-.btn-login:active {
-    transform: translateY(0);
-}
 
 /* Shake animation */
 @keyframes shake {
@@ -363,8 +269,7 @@
 }
 
 /* ===== LOADING SPINNER (shared) ===== */
-.btn-login .spinner,
-.btn-google .spinner {
+.btn-provider .spinner {
     display: none;
     width: 16px;
     height: 16px;
@@ -375,17 +280,12 @@
     margin: 0 auto;
 }
 
-.btn-login.loading .spinner,
-.btn-google.loading .spinner {
+.btn-provider.loading .spinner {
     display: block;
 }
 
-.btn-login.loading .btn-text {
-    display: none;
-}
-
-.btn-google.loading .btn-google-icon,
-.btn-google.loading .btn-google-text {
+.btn-provider.loading .btn-provider-icon,
+.btn-provider.loading .btn-provider-text {
     display: none;
 }
 
@@ -395,8 +295,14 @@
     }
 }
 
-/* ===== GOOGLE BUTTON ===== */
-.btn-google {
+/* ===== PROVIDER BUTTONS ===== */
+.auth-providers {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.btn-provider {
     width: 100%;
     display: flex;
     align-items: center;
@@ -414,11 +320,10 @@
     cursor: pointer;
     position: relative;
     overflow: hidden;
-    margin-bottom: 4px;
     font-family: 'Inter', sans-serif;
 }
 
-.btn-google::before {
+.btn-provider::before {
     content: '';
     position: absolute;
     inset: 0;
@@ -427,22 +332,22 @@
     transition: transform 0.5s ease;
 }
 
-.btn-google:hover::before {
+.btn-provider:hover::before {
     transform: translateX(100%) skewX(-15deg);
 }
 
-.btn-google:hover {
+.btn-provider:hover {
     background: rgba(255, 255, 255, 0.09);
     border-color: rgba(255, 255, 255, 0.2);
     transform: translateY(-2px);
     box-shadow: 0 8px 28px rgba(0, 0, 0, 0.3);
 }
 
-.btn-google:active {
+.btn-provider:active {
     transform: translateY(0);
 }
 
-.btn-google-icon {
+.btn-provider-icon {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -451,31 +356,12 @@
     height: 20px;
 }
 
-.btn-google-text {
+.btn-provider-text {
     flex: 1;
     text-align: center;
 }
 
-/* ===== AUTH DIVIDER ===== */
-.auth-divider {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin: 20px 0 4px;
-}
-
-.auth-divider::before,
-.auth-divider::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: rgba(255, 255, 255, 0.07);
-}
-
-.auth-divider span {
-    font-size: 0.75rem;
-    color: rgba(255, 255, 255, 0.25);
-    letter-spacing: 0.06em;
-    white-space: nowrap;
-    text-transform: uppercase;
-}
+/* Specific Provider Colors on Hover */
+.btn-google:hover { border-color: rgba(66, 133, 244, 0.5); }
+.btn-microsoft:hover { border-color: rgba(0, 164, 239, 0.5); }
+.btn-github:hover { border-color: rgba(255, 255, 255, 0.4); }
