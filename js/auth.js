@@ -108,8 +108,9 @@ function initGoogleLogin() {
       onLoginSuccess(result.user);
     } catch (err) {
       btn.classList.remove('loading');
+      console.error('Detailed Google Sign-In Error:', err);
       if (err.code !== 'auth/popup-closed-by-user') {
-        showError('Google sign-in failed. Please try again.');
+        showError(`Sign-in failed: ${err.message || 'Please try again.'}`);
       }
     }
   });

@@ -21,10 +21,9 @@ body::before {
     z-index: 1;
     pointer-events: none;
     background: repeating-linear-gradient(0deg,
-            transparent,
             transparent 2px,
-            rgba(0, 200, 255, 0.012) 2px,
-            rgba(0, 200, 255, 0.012) 4px);
+            rgba(0, 240, 255, 0.012) 2px,
+            rgba(0, 240, 255, 0.012) 4px);
     animation: scanlines-move 8s linear infinite;
 }
 
@@ -55,7 +54,7 @@ body::before {
 
 .glitch::before {
     left: 2px;
-    color: #00c8ff;
+    color: #00f0ff;
     clip-path: polygon(0 15%, 100% 15%, 100% 30%, 0 30%);
     animation: glitch-before 3s infinite linear;
     opacity: 0.8;
@@ -63,7 +62,8 @@ body::before {
 
 .glitch::after {
     left: -2px;
-    color: #8b5cf6;
+    color: #f72585;
+    /* Changed from purple to pink for stronger contrast */
     clip-path: polygon(0 65%, 100% 65%, 100% 80%, 0 80%);
     animation: glitch-after 3s infinite linear;
     opacity: 0.8;
@@ -195,10 +195,7 @@ body::before {
     inset: 0;
     pointer-events: none;
     opacity: 0;
-    background: linear-gradient(135deg, #00c8ff, #8b5cf6);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: #00f0ff;
     transition: opacity 0.1s;
 }
 
@@ -307,7 +304,7 @@ body::before {
     left: 0;
     right: 0;
     height: 2px;
-    background: linear-gradient(90deg, transparent, #00c8ff, #8b5cf6, transparent);
+    background: #00f0ff;
     pointer-events: none;
     animation: glitch-bar 0.6s ease forwards;
 }
@@ -347,18 +344,14 @@ body::before {
 }
 
 .animated-border {
-    border: 1px solid transparent;
-    background:
-        linear-gradient(#0f0f1c, #0f0f1c) padding-box,
-        conic-gradient(from var(--angle), #00c8ff, #8b5cf6, #00c8ff) border-box;
-    animation: border-spin 3s linear infinite;
+    border: 1px solid #00f0ff;
 }
 
 /* ─── Cursor ring ──────────────────────── */
 .cursor-dot {
     width: 6px;
     height: 6px;
-    background: #00c8ff;
+    background: #00f0ff;
     border-radius: 50%;
     position: fixed;
     pointer-events: none;
@@ -366,14 +359,14 @@ body::before {
     top: 0;
     left: 0;
     transform: translate(-50%, -50%);
-    box-shadow: 0 0 8px #00c8ff;
+    box-shadow: 0 0 8px #00f0ff;
     transition: width 0.2s, height 0.2s, background 0.2s;
 }
 
 .cursor-ring {
     width: 28px;
     height: 28px;
-    border: 1.5px solid rgba(0, 200, 255, 0.5);
+    border: 1.5px solid rgba(0, 240, 255, 0.5);
     border-radius: 50%;
     position: fixed;
     pointer-events: none;
@@ -397,7 +390,7 @@ body::before {
     left: 0;
     width: 100%;
     height: 1px;
-    background: linear-gradient(90deg, #00c8ff, #8b5cf6);
+    background: #00f0ff;
     transform: scaleX(0);
     transform-origin: left;
     transition: transform 0.6s ease;
@@ -412,10 +405,9 @@ body::before {
     height: 2px;
     width: 0;
     border-radius: 2px;
-    background: linear-gradient(90deg, #00c8ff, #8b5cf6);
+    background: #00f0ff;
     margin-bottom: 20px;
-    box-shadow: 0 0 14px rgba(0, 200, 255, 0.5),
-        0 0 28px rgba(139, 92, 246, 0.3);
+    box-shadow: 0 0 14px rgba(0, 240, 255, 0.5);
     position: relative;
     overflow: visible;
 }
@@ -430,8 +422,8 @@ body::before {
     width: 8px;
     height: 8px;
     border-radius: 50%;
-    background: #00c8ff;
-    box-shadow: 0 0 12px #00c8ff, 0 0 24px rgba(0, 200, 255, 0.5);
+    background: #00f0ff;
+    box-shadow: 0 0 12px #00f0ff, 0 0 24px rgba(0, 240, 255, 0.5);
 }
 
 /* ─── Typing cursor ────────────────────── */
@@ -439,11 +431,11 @@ body::before {
     display: inline-block;
     width: 2px;
     height: 1em;
-    background: #00c8ff;
+    background: #00f0ff;
     margin-left: 2px;
     vertical-align: text-bottom;
     animation: cursor-blink 0.8s step-end infinite;
-    box-shadow: 0 0 8px #00c8ff;
+    box-shadow: 0 0 8px #00f0ff;
 }
 
 @keyframes cursor-blink {
@@ -463,7 +455,7 @@ body::before {
     position: fixed;
     inset: 0;
     z-index: 9998;
-    background: linear-gradient(135deg, #00c8ff, #8b5cf6);
+    background: #050508;
     transform: scaleY(0);
     transform-origin: bottom;
     pointer-events: none;

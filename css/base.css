@@ -6,29 +6,34 @@
 
 :root {
   /* Colors */
-  --bg-primary: #08080e;
-  --bg-secondary: #0d0d18;
-  --bg-card: rgba(255, 255, 255, 0.03);
-  --surface: #12121f;
-  --surface-2: #1a1a2e;
+  --bg-primary: #050508;
+  /* Deeper black */
+  --bg-secondary: #0a0a10;
+  --bg-card: rgba(255, 255, 255, 0.02);
+  --surface: #0f1016;
+  --surface-2: #161821;
 
-  --accent-cyan: #00c8ff;
-  --accent-purple: #8b5cf6;
-  --accent-cyan-dim: rgba(0, 200, 255, 0.15);
-  --accent-purple-dim: rgba(139, 92, 246, 0.15);
+  /* Accent Colors - Elegant Neon */
+  --accent-cyan: #00f0ff;
+  --accent-purple: #9d4edd;
+  --accent-pink: #f72585;
+  /* Added a pink accent for better gradients */
 
-  --text-primary: #f0f0f5;
-  --text-secondary: #8b8b9e;
-  --text-muted: #4a4a60;
+  --accent-cyan-dim: rgba(0, 240, 255, 0.15);
+  --accent-purple-dim: rgba(157, 78, 221, 0.15);
 
-  --border: rgba(255, 255, 255, 0.06);
-  --border-hover: rgba(0, 200, 255, 0.3);
+  --text-primary: #ffffff;
+  --text-secondary: #a0a0b5;
+  --text-muted: #57576a;
 
-  --glass-bg: rgba(255, 255, 255, 0.04);
-  --glass-border: rgba(255, 255, 255, 0.08);
+  --border: rgba(255, 255, 255, 0.05);
+  --border-hover: rgba(0, 240, 255, 0.4);
 
-  --gradient-hero: linear-gradient(135deg, #00c8ff 0%, #8b5cf6 100%);
-  --gradient-card: linear-gradient(135deg, rgba(0,200,255,0.05) 0%, rgba(139,92,246,0.05) 100%);
+  --glass-bg: rgba(255, 255, 255, 0.03);
+  --glass-border: rgba(255, 255, 255, 0.06);
+
+  --gradient-hero: var(--accent-cyan);
+  --gradient-card: rgba(0, 240, 255, 0.05);
 
   /* Typography */
   --font-primary: 'Space Grotesk', 'Inter', sans-serif;
@@ -51,7 +56,9 @@
 }
 
 /* ===== RESET ===== */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -71,7 +78,8 @@ body {
   overflow-x: hidden;
 }
 
-img, video {
+img,
+video {
   max-width: 100%;
   display: block;
 }
@@ -81,7 +89,8 @@ a {
   color: inherit;
 }
 
-ul, ol {
+ul,
+ol {
   list-style: none;
 }
 
@@ -93,21 +102,33 @@ button {
   font-family: inherit;
 }
 
-input, textarea {
+input,
+textarea {
   font-family: inherit;
   outline: none;
 }
 
 /* ===== SCROLLBAR ===== */
-::-webkit-scrollbar { width: 4px; }
-::-webkit-scrollbar-track { background: var(--bg-primary); }
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(var(--accent-cyan), var(--accent-purple));
+  background: var(--accent-cyan);
   border-radius: 4px;
 }
 
 /* ===== TYPOGRAPHY ===== */
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: var(--font-primary);
   line-height: 1.2;
   font-weight: 700;
@@ -131,10 +152,7 @@ section {
   font-weight: 600;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  background: var(--gradient-hero);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--accent-cyan);
   margin-bottom: 12px;
   display: inline-block;
 }
@@ -152,12 +170,9 @@ section {
   line-height: 1.7;
 }
 
-/* ===== GRADIENT TEXT ===== */
+/* ===== SOLID TEXT COLOR ===== */
 .gradient-text {
-  background: var(--gradient-hero);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--accent-cyan);
 }
 
 /* ===== GLASS CARD ===== */
@@ -175,7 +190,7 @@ section {
   align-items: center;
   gap: 8px;
   padding: 14px 32px;
-  background: var(--gradient-hero);
+  background: var(--accent-cyan);
   border-radius: 50px;
   font-weight: 600;
   font-size: 0.9rem;
@@ -189,7 +204,7 @@ section {
   content: '';
   position: absolute;
   inset: 0;
-  background: rgba(255,255,255,0.1);
+  background: rgba(255, 255, 255, 0.1);
   transform: translateX(-100%);
   transition: var(--transition-mid);
 }
@@ -270,5 +285,22 @@ body::before {
   :root {
     --section-padding: 80px 0;
     --container-padding: 0 20px;
+  }
+}
+
+/* ===== MATERIAL UI RIPPLE EFFECT ===== */
+.ripple {
+  position: absolute;
+  border-radius: 50%;
+  transform: scale(0);
+  animation: ripple 0.6s linear;
+  background-color: rgba(255, 255, 255, 0.4);
+  pointer-events: none;
+}
+
+@keyframes ripple {
+  to {
+    transform: scale(4);
+    opacity: 0;
   }
 }

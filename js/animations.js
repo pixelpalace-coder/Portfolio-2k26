@@ -383,6 +383,67 @@ function initAnimations() {
     //  REFRESH
     // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     window.addEventListener('load', () => ScrollTrigger.refresh());
+
+    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    //  MATERIAL UI RIPPLE EFFECT
+    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    function createRipple(event) {
+        const button = event.currentTarget;
+        const circle = document.createElement('span');
+        const diameter = Math.max(button.clientWidth, button.clientHeight);
+        const radius = diameter / 2;
+
+        circle.style.width = circle.style.height = `${diameter}px`;
+        circle.style.left = `${event.clientX - button.getBoundingClientRect().left - radius}px`;
+        circle.style.top = `${event.clientY - button.getBoundingClientRect().top - radius}px`;
+        circle.classList.add('ripple');
+
+        const ripple = button.getElementsByClassName('ripple')[0];
+        if (ripple) {
+            ripple.remove();
+        }
+
+        button.appendChild(circle);
+    }
+
+    const buttons = document.querySelectorAll('.btn-primary, .btn-outline, .btn-provider, .social-btn');
+    for (const button of buttons) {
+        button.addEventListener('click', createRipple);
+        // ensure position relative and overflow hidden for ripples
+        button.style.position = 'relative';
+        button.style.overflow = 'hidden';
+    }
+
+    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    //  ANIME.JS: Floating Hero Glows
+    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    if (typeof anime !== 'undefined') {
+        anime({
+            targets: ['.hero-glow-1', '.hero-glow-2'],
+            translateX: function () { return anime.random(-50, 50); },
+            translateY: function () { return anime.random(-50, 50); },
+            scale: function () { return anime.random(1, 1.2); },
+            easing: 'easeInOutQuad',
+            duration: 3000,
+            direction: 'alternate',
+            loop: true
+        });
+    }
+
+    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    //  LOTTIE: Chatbot Avatar
+    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    const lottieRobot = document.getElementById('lottie-robot');
+    if (lottieRobot && typeof lottie !== 'undefined') {
+        lottie.loadAnimation({
+            container: lottieRobot,
+            renderer: 'svg',
+            loop: true,
+            autoplay: true,
+            // Fallback placeholder Lottie animation from a public URL
+            path: 'https://lottie.host/80e74f85-3ff4-4ea4-8255-7096e5b0213b/sP0FmsK8Zz.json'
+        });
+    }
 }
 
 window.initAnimations = initAnimations;

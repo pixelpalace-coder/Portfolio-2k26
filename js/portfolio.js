@@ -67,28 +67,56 @@ const CERTIFICATIONS = [
         name: 'CodePunk v1.0',
         org: 'GLA University',
         color1: '#00c8ff',
-        color2: '#0077b6'
+        color2: '#0077b6',
+        image: 'certificates/codepunk.jpg'
     },
     {
         id: 2,
         name: 'GeekVerse V.1',
         org: 'GLA University',
         color1: '#8b5cf6',
-        color2: '#5b21b6'
+        color2: '#5b21b6',
+        image: 'certificates/GeeksVerse v1 certificate.jpg'
     },
     {
         id: 3,
         name: 'Introduction to Azure Static Web Apps',
         org: 'M.S.L.A.',
         color1: '#0ea5e9',
-        color2: '#3b82f6'
+        color2: '#3b82f6',
+        image: 'certificates/MLSA Certificate.jpg'
     },
     {
         id: 4,
-        name: 'SQL Bootcamp',
-        org: 'Lets Upgrade',
+        name: 'Hackmania 2025',
+        org: 'GLA University',
         color1: '#f59e0b',
-        color2: '#d97706'
+        color2: '#d97706',
+        image: 'certificates/hackmania 25 certificate.jpg'
+    },
+    {
+        id: 5,
+        name: 'TechNavya2.0(WebxDesign)',
+        org: 'GLA University',
+        color1: '#f43f5e',
+        color2: '#be123c',
+        image: 'certificates/technavya26.jpeg'
+    },
+    {
+        id: 6,
+        name: 'CodeAlpha Internship Certificate',
+        org: 'CodeAlpha',
+        color1: '#34d399',
+        color2: '#059669',
+        image: 'certificates/intern.jpg'
+    },
+    {
+        id: 7,
+        name: 'Campus Ambassador',
+        org: 'SmartED',
+        color1: '#fbbf24',
+        color2: '#d97706',
+        image: 'certificates/campus ambassador certificate.jpg'
     }
 ];
 
@@ -118,7 +146,10 @@ function renderCertifications() {
     grid.innerHTML = CERTIFICATIONS.map(c => `
     <div class="cert-card" onclick="openCertModal(${c.id})">
       <div class="cert-thumb">
-        <canvas id="cert-canvas-${c.id}" width="400" height="225"></canvas>
+        ${c.image
+            ? `<img src="${c.image}" alt="${c.name}" class="cert-thumb-img" style="width:100%; height:100%; border-radius:8px;">`
+            : `<canvas id="cert-canvas-${c.id}" width="400" height="225"></canvas>`
+        }
         <div class="cert-thumb-overlay"></div>
         <div class="cert-thumb-view">👁️</div>
       </div>
@@ -129,9 +160,11 @@ function renderCertifications() {
     </div>
   `).join('');
 
-    // Draw certificate thumbnails on canvas
+    // Draw certificate thumbnails on canvas (only if no image)
     CERTIFICATIONS.forEach(c => {
-        drawCertCanvas(`cert-canvas-${c.id}`, c, false);
+        if (!c.image) {
+            drawCertCanvas(`cert-canvas-${c.id}`, c, false);
+        }
     });
 }
 
@@ -258,11 +291,34 @@ function openCertModal(id) {
     document.getElementById('cert-modal-name').textContent = c.name;
     document.getElementById('cert-modal-org').textContent = c.org;
 
-    // Draw large canvas
     const canvas = document.getElementById('cert-modal-canvas');
-    canvas.width = 600;
-    canvas.height = 337;
-    drawCertCanvas('cert-modal-canvas', c, true);
+    let modalImg = document.getElementById('cert-modal-img');
+
+    if (c.image) {
+        // Show image, hide canvas
+        if (!modalImg) {
+            modalImg = document.createElement('img');
+            modalImg.id = 'cert-modal-img';
+            modalImg.style.width = '100%';
+            modalImg.style.borderRadius = '12px';
+            modalImg.style.margin = '16px 0';
+            modalImg.style.border = '1px solid rgba(255,255,255,0.06)';
+            modalImg.style.display = 'block';
+            canvas.parentNode.insertBefore(modalImg, canvas);
+        }
+        modalImg.src = c.image;
+        modalImg.style.display = 'block';
+        canvas.style.display = 'none';
+    } else {
+        // Show canvas, hide image
+        canvas.style.display = 'block';
+        if (modalImg) modalImg.style.display = 'none';
+
+        // Draw large canvas
+        canvas.width = 600;
+        canvas.height = 337;
+        drawCertCanvas('cert-modal-canvas', c, true);
+    }
 
     modal.classList.add('active');
     document.body.style.overflow = 'hidden';

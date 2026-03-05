@@ -4,37 +4,41 @@
 
 const SHY_RESPONSES = {
     greeting: [
-        "Hi there! I'm Shy, Suryansh's assistant. How can I help you today?",
-        "Hello! I'm Shy — feel free to ask me anything about Suryansh's work."
+        "👋 Hello! I'm Shy, Suryansh's personal AI assistant. \n\nI can tell you about his:\n• 🐍 Python & Tech Skills\n• 🚀 Featured Projects\n• 🎓 Education & Certs\n• ✉️ Contact Information\n• 📂 GitHub Profiles\n\nHow can I help you explore today?",
+        "Hi there! I'm Shy. I help people learn more about Suryansh's work. What would you like to know?"
     ],
     skills: [
-        "Suryansh is primarily a Python programmer, skilled in libraries like Pandas, Matplotlib, Streamlit, Pygame, and pyttsx3. On the web side, he works with HTML, CSS, JavaScript, MySQL, and Java.",
-        "His core skills include Python (with Pandas, Matplotlib, Streamlit), JavaScript, HTML/CSS, MySQL, and Java. He's also experienced with version control using Git."
+        "Suryansh specializes in **Python Development**. Here's his tech stack:\n\n**Core Languages:**\n• Python (Expert)\n• JavaScript\n• Java, HTML/CSS, SQL\n\n**Key Libraries:**\n• Pandas, Matplotlib (Data Science)\n• Streamlit, Pygame\n• Three.js, AOS.js (Web Visuals)",
+        "His expertise covers:\n• **Programming:** Python, Java, JavaScript\n• **Data Tools:** Pandas, Matplotlib\n• **Web:** HTML5, CSS3, Three.js, Firebase\n• **Databases:** MySQL"
     ],
     projects: [
-        "Suryansh has built some impressive projects: a Food Delivery System (Python + MySQL + ML), a Lyrics Animation System (Pygame), an Expense Manager (Streamlit), and an Interactive Tourism Website (Three.js + Firebase).",
-        "Key projects include a smart Food Delivery System with data analytics, a Pygame Lyrics Animation tool, an Expense Manager web app, and an Interactive 3D Tourism Website."
+        "Suryansh has built some great projects. Here are the highlights:\n\n• 🍕 **Food Delivery System**: Python + MySQL + Analytics\n• 🎵 **Lyrics Animation**: Pygame-based sync visuals\n• 💰 **Expense Manager**: Streamlit web application\n• 🗺️ **3D Tourism Map**: Interactive Three.js experience",
+        "Most notable work:\n1. 3D Tourism Website (Three.js)\n2. Food Delivery System (Python/MySQL)\n3. Expense Management Tool (Streamlit)\n4. Lyrics Animation System (Pygame)"
     ],
     experience: [
-        "Suryansh worked as a Front End Developer at CodeAlpha from January to February 2026, where he built responsive web pages with HTML, CSS, and JavaScript, and collaborated closely with UX/UI designers.",
-        "He completed a Front End Developer internship at CodeAlpha (Jan–Feb 2026), focusing on responsive design, cross-platform development, and version control with Git."
+        "**Recent Experience:**\n\n• **CodeAlpha** (Jan - Feb 2026)\n*Front End Developer Intern*\n- Built responsive platforms using HTML/CSS/JS\n- Translated UI/UX designs into functional code\n- Managed version control with Git",
+        "He recently interned at CodeAlpha as a Front End Developer, mastering responsive design and collaborative development workflows."
     ],
     contact: [
-        "You can reach Suryansh at suryanshdevniranjan@gmail.com or call/WhatsApp him at 8171630731. Find his work on GitHub, or connect on LinkedIn!",
-        "Best way to reach him: suryanshdevniranjan@gmail.com for professional inquiries. He's also active on LinkedIn and GitHub."
+        "You can connect with Suryansh through:\n\n• ✉️ **Email**: suryanshdevniranjan@gmail.com\n• 📞 **Phone/WhatsApp**: +91 8171630731\n• 🔗 **LinkedIn**: [Suryansh Niranjan](https://linkedin.com/in/suryansh-niranjan)\n\nHe's always open to new opportunities!",
+        "Reach out via email at suryanshdevniranjan@gmail.com or connect on LinkedIn. He's very responsive!"
+    ],
+    github: [
+        "Suryansh manages **3 different GitHub profiles**:\n\n1. 🏠 **Main Development**: [pixelpalace-coder](https://github.com/pixelpalace-coder)\n2. 🧬 **Data Science & ML**: (Please provide link)\n3. 🛠️ **Utility & Scripts**: (Please provide link)\n\nYou can find all his latest code there!",
+        "He has three GitHub accounts for organized development:\n- **Main**: pixelpalace-coder\n- **Projects/Labs**: (Link needed)\n- **Archives**: (Link needed)"
     ],
     education: [
-        "Suryansh is pursuing a Bachelor of Computer Applications (BCA) from GLA University, Mathura, India. He's passionate about expanding his knowledge in Python, Kotlin, Go, and modern web tech.",
-        "He's a BCA student at GLA University, Mathura, UP — combining academic learning with hands-on project development."
+        "**Academic Background:**\n\n• 🎓 **Bachelor of Computer Application (BCA)**\n• 🏛️ **GLA University**, Mathura, India\n• 📚 Pursuing deeper expertise in Python, Cloud, and Web Architecture.",
+        "Suryansh is a BCA student at GLA University, maintaining a strong focus on Python and interactive web technologies."
     ],
     certifications: [
-        "Suryansh holds certifications in CodePunk v1.0 (GLA University), GeekVerse V.1 (GLA University), Introduction to Azure Static Web Apps (M.S.L.A.), and SQL Bootcamp (Lets Upgrade).",
-        "His certifications include CodePunk v1.0, GeekVerse V.1, Azure Static Web Apps, and SQL Bootcamp — covering cloud, databases, and development best practices."
+        "**Verified Credentials:**\n\n• 🏆 CodePunk v1.0 (GLA University)\n• 🏆 GeekVerse V.1 (GLA University)\n• 🏆 Azure Static Web Apps (M.S.L.A.)\n• 🏆 SQL Bootcamp (Lets Upgrade)",
+        "He holds multiple certifications including GLA University's CodePunk and GeekVerse, Azure Web Apps, and SQL masterclasses."
     ],
     default: [
-        "That's a great question! For detailed info, I'd suggest reaching out to Suryansh directly at suryanshdevniranjan@gmail.com.",
-        "I'm not sure about that specific topic, but feel free to ask about Suryansh's skills, projects, experience, or how to contact him!",
-        "Hmm, I don't have that detail right now. Try asking about skills, projects, certifications, experience, or contact info!"
+        "I'm not quite sure about that. Could you try asking about his **Skills**, **Projects**, **Contact**, or **GitHub**?",
+        "That's interesting! I might not have that specific detail yet. Feel free to ask about his background, tech stack, or achievements.",
+        "Hmm, I'm still learning! Try asking about 'GitHub' or 'Projects' to see what Suryansh has been up to."
     ]
 };
 
@@ -126,7 +130,8 @@ function initChatbot() {
         if (/skill|python|language|tech|stack|know|code/i.test(text)) return 'skills';
         if (/project|built|made|work|app|system/i.test(text)) return 'projects';
         if (/experience|intern|job|work|company|codealpha/i.test(text)) return 'experience';
-        if (/contact|email|phone|reach|linkedin|github/i.test(text)) return 'contact';
+        if (/github/i.test(text)) return 'github';
+        if (/contact|email|phone|reach|linkedin/i.test(text)) return 'contact';
         if (/education|university|college|study|gla|bca/i.test(text)) return 'education';
         if (/cert|certificate|award|badge|bootcamp/i.test(text)) return 'certifications';
         return 'default';

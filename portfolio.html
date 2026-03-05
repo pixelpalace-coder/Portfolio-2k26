@@ -27,6 +27,16 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
+    <!-- External Animation Libraries -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.2/anime.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
+
+    <!-- Three.js for 3D Animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://unpkg.com/troika-three-text/dist/troika-three-text.umd.js"></script>
+
     <style>
         /* Prevent FOUC — hide animated elements until JS sets initial states */
         .hero-eyebrow,
@@ -104,6 +114,9 @@
   ═══════════════════════════════════════ -->
     <section id="hero">
         <div class="hero-bg">
+            <!-- 3D Canvas Background -->
+            <canvas id="hero-3d-canvas"
+                style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; mix-blend-mode: screen;"></canvas>
             <div class="hero-glow-1"></div>
             <div class="hero-glow-2"></div>
             <div class="hero-grid-bg"></div>
@@ -113,6 +126,8 @@
             <div class="hero-eyebrow">
                 Open to opportunities · GLA University BCA
             </div>
+
+            <!-- HTML Title removed in favor of 3D Troika Text in canvas -->
 
             <h1 class="hero-title">
                 <span class="line">
@@ -176,7 +191,7 @@
                 </div>
 
                 <!-- Content -->
-                <div class="about-content">
+                <div class="about-content" data-aos="fade-left">
                     <span class="section-label">About Me</span>
                     <h2 class="section-title">Building solutions with <span class="gradient-text">Python & beyond</span>
                     </h2>
@@ -225,7 +240,7 @@
 
             <div class="skills-categories">
 
-                <div class="skill-category-card">
+                <div class="skill-category-card" data-aos="fade-up" data-aos-delay="100">
                     <div class="skill-cat-icon">🐍</div>
                     <h3 class="skill-cat-title">Programming Languages</h3>
                     <div class="skill-tags">
@@ -237,7 +252,7 @@
                     </div>
                 </div>
 
-                <div class="skill-category-card">
+                <div class="skill-category-card" data-aos="fade-up" data-aos-delay="200">
                     <div class="skill-cat-icon">📦</div>
                     <h3 class="skill-cat-title">Python Libraries</h3>
                     <div class="skill-tags">
@@ -250,7 +265,7 @@
                     </div>
                 </div>
 
-                <div class="skill-category-card">
+                <div class="skill-category-card" data-aos="fade-up" data-aos-delay="300">
                     <div class="skill-cat-icon">🌐</div>
                     <h3 class="skill-cat-title">Web & Databases</h3>
                     <div class="skill-tags">
@@ -262,7 +277,7 @@
                     </div>
                 </div>
 
-                <div class="skill-category-card">
+                <div class="skill-category-card" data-aos="fade-up" data-aos-delay="400">
                     <div class="skill-cat-icon">🤝</div>
                     <h3 class="skill-cat-title">Soft Skills</h3>
                     <div class="skill-tags">
@@ -324,7 +339,7 @@
             <h2 class="section-title">Work <span class="gradient-text">Experience</span></h2>
 
             <div class="timeline">
-                <div class="timeline-item">
+                <div class="timeline-item" data-aos="fade-right">
                     <p class="timeline-date">01/2026 — 02/2026 &nbsp;·&nbsp; Remote</p>
                     <h3 class="timeline-company">CodeAlpha</h3>
                     <p class="timeline-role">Front End Developer</p>
@@ -399,14 +414,28 @@
                         <span class="contact-link-text">+91 8171630731</span>
                     </a>
 
-                    <div class="contact-socials">
-                        <a href="https://github.com/pixelpalace-coder" target="_blank" rel="noopener"
-                            class="social-btn">
+                    <div class="contact-socials" style="display: flex; flex-wrap: wrap; gap: 12px;">
+                        <a href="https://github.com/pixelpalace-coder" target="_blank" rel="noopener" class="social-btn"
+                            title="Main Development Profile">
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
                                 <path
                                     d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
                             </svg>
-                            GitHub
+                            GitHub (Main)
+                        </a>
+                        <a href="#" target="_blank" rel="noopener" class="social-btn" title="Data Science & ML">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                <path
+                                    d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
+                            </svg>
+                            GitHub (AI/ML)
+                        </a>
+                        <a href="#" target="_blank" rel="noopener" class="social-btn" title="Utilities & Web">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                <path
+                                    d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
+                            </svg>
+                            GitHub (Utils)
                         </a>
                         <a href="https://linkedin.com/in/suryansh-niranjan" target="_blank" rel="noopener"
                             class="social-btn">
@@ -425,11 +454,11 @@
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="cf-name">Name</label>
-                                <input type="text" id="cf-name" placeholder="John Doe" required>
+                                <input type="text" id="cf-name" placeholder="Suryansh Niranjan" required>
                             </div>
                             <div class="form-group">
                                 <label for="cf-email">Email</label>
-                                <input type="email" id="cf-email" placeholder="john@example.com" required>
+                                <input type="email" id="cf-email" placeholder="suryanshdevniranjan@gmail.com" required>
                             </div>
                         </div>
                         <div class="form-group">
@@ -477,7 +506,7 @@
 
     <div id="chat-window">
         <div class="chat-header">
-            <div class="chat-avatar">🤖</div>
+            <div class="chat-avatar" id="lottie-robot" style="width: 40px; height: 40px;"></div>
             <div class="chat-info">
                 <h4>Shy</h4>
                 <p>Suryansh's AI Assistant</p>
@@ -507,6 +536,7 @@
     <script src="js/chatbot.js"></script>
     <script src="js/animations.js"></script>
     <script src="js/sound.js"></script>
+    <script src="js/3d-scene.js"></script>
     <script>
         // 1. Auth guard
         authGuard();
@@ -517,6 +547,12 @@
 
         // 3. Init all modules after DOM ready
         document.addEventListener('DOMContentLoaded', () => {
+            AOS.init({
+                duration: 800,
+                easing: 'ease-out-cubic',
+                once: true,
+                offset: 50
+            });
             initPortfolio();   // renders project & cert cards
             initChatbot();
             populateUserAvatar();
